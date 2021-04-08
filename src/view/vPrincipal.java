@@ -50,41 +50,65 @@ public class vPrincipal extends JFrame {
 
         buttonCredits = new JButton("Creditos");
         buttonCredits.setFont(googleFont2);
-        //buttonCredits.setPreferredSize(new Dimension(300,30));
+        buttonCredits.setPreferredSize(new Dimension(180,30));
+        buttonCredits.setMaximumSize(new Dimension(180,30));
+        buttonCredits.setMinimumSize(new Dimension(180,30));
+        buttonCredits.setBackground(Color.WHITE);
 
         buttonConsume = new JButton("Consumo");
         buttonConsume.setFont(googleFont2);
+        buttonConsume.setPreferredSize(new Dimension(180,30));
+        buttonConsume.setMaximumSize(new Dimension(180,30));
+        buttonConsume.setMinimumSize(new Dimension(180,30));
+        buttonConsume.setBackground(Color.WHITE);
         //buttonConsume.setMinimumSize(new Dimension(300,30));
 
         buttonGeneral = new JButton("Rep. General");
         buttonGeneral.setFont(googleFont2);
+        buttonGeneral.setPreferredSize(new Dimension(180,30));
+        buttonGeneral.setMaximumSize(new Dimension(180,30));
+        buttonGeneral.setMinimumSize(new Dimension(180,30));
+        buttonGeneral.setBackground(Color.WHITE);
 
         buttonIndividual = new JButton("Rep. Individual");
         buttonIndividual.setFont(googleFont2);
+        buttonIndividual.setPreferredSize(new Dimension(180,30));
+        buttonIndividual.setMaximumSize(new Dimension(180,30));
+        buttonIndividual.setMinimumSize(new Dimension(180,30));
+        buttonIndividual.setBackground(Color.WHITE);
 
         buttonMenu = new JButton("Menu");
         buttonMenu.setFont(googleFont2);
+        buttonMenu.setPreferredSize(new Dimension(180,30));
+        buttonMenu.setMaximumSize(new Dimension(180,30));
+        buttonMenu.setMinimumSize(new Dimension(180,30));
+        buttonMenu.setBackground(Color.WHITE);
 
         buttonUsers = new JButton("Usuarios");
         buttonUsers.setFont(googleFont2);
+        buttonUsers.setPreferredSize(new Dimension(180,30));
+        buttonUsers.setMaximumSize(new Dimension(180,30));
+        buttonUsers.setMinimumSize(new Dimension(180,30));
+        buttonUsers.setBackground(Color.WHITE);
 
         buttonExit = new JButton("Salir");
         buttonExit.setFont(googleFont2);
         buttonExit.setAlignmentX(CENTER_ALIGNMENT);
+        buttonExit.setBackground(Color.WHITE);
 
-        row1.add(Box.createRigidArea(new Dimension(200, 0)));
+        row1.add(Box.createRigidArea(new Dimension(135, 0)));
         row1.add(buttonCredits);
-        row1.add(Box.createRigidArea(new Dimension(100, 0)));
+        row1.add(Box.createRigidArea(new Dimension(70, 0)));
         row1.add(buttonConsume);
 
-        row2.add(Box.createRigidArea(new Dimension(180, 0)));
+        row2.add(Box.createRigidArea(new Dimension(135, 0)));
         row2.add(buttonGeneral);
-        row2.add(Box.createRigidArea(new Dimension(65, 0)));
+        row2.add(Box.createRigidArea(new Dimension(70, 0)));
         row2.add(buttonIndividual);
 
-        row3.add(Box.createRigidArea(new Dimension(210, 0)));
+        row3.add(Box.createRigidArea(new Dimension(135, 0)));
         row3.add(buttonMenu);
-        row3.add(Box.createRigidArea(new Dimension(115, 0)));
+        row3.add(Box.createRigidArea(new Dimension(70, 0)));
         row3.add(buttonUsers);
 
         upperPanel = new JPanel();

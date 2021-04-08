@@ -52,6 +52,10 @@ public class vLogin extends JFrame {
         userfield.setFont(googleFont2);
         userfield.setMaximumSize(new Dimension(250,100));
 
+        //*******************************
+        //userfield.getText();
+        //*******************************
+
         row1.add(Box.createRigidArea(new Dimension(100, 0)));
         row1.add(user);
         row1.add(Box.createRigidArea(new Dimension(50, 0)));
@@ -65,6 +69,10 @@ public class vLogin extends JFrame {
         //passfield.setHorizontalAlignment(JPasswordField.CENTER);
         passfield.setFont(googleFont);
         passfield.setMaximumSize(new Dimension(250,50));
+
+        //*******************************
+        //passfield.getPassword().toString();
+        //*******************************
 
         row2.add(Box.createRigidArea(new Dimension(100, 0)));
         row2.add(pass);
