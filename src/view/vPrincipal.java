@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("ALL")
 public class vPrincipal extends JFrame {
 
     private ListenerP listener;
@@ -30,10 +31,16 @@ public class vPrincipal extends JFrame {
     private Font googleFont2;
 
     public vPrincipal(Control control, vLogin vLogin){
-
+        /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
+           como una clase interna
+        */
         this.control = control;
         this.vLogin = vLogin;
         listener = new ListenerP();
+
+        /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
+           el tipo de layout, el color de fondo y el tipo de letra a usar
+        */
         setTitle("Principal");
         setSize(700, 500);
         setResizable(false);
@@ -46,7 +53,6 @@ public class vPrincipal extends JFrame {
         row1.setMaximumSize(new Dimension(700,30));
         row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
         row1.setBackground(Color.WHITE);
-
 
         row2 = new JPanel();
         row2.setMaximumSize(new Dimension(700,30));
@@ -75,7 +81,6 @@ public class vPrincipal extends JFrame {
         buttonConsume.setMaximumSize(new Dimension(180,30));
         buttonConsume.setMinimumSize(new Dimension(180,30));
         buttonConsume.setBackground(Color.WHITE);
-        //buttonConsume.setMinimumSize(new Dimension(300,30));
 
         buttonGeneral = new JButton("Rep. General");
         buttonGeneral.setFont(googleFont2);
@@ -132,8 +137,6 @@ public class vPrincipal extends JFrame {
         upperPanel.setMaximumSize(new Dimension(700,100));
 
         title = new JLabel("Página Principal");
-        //title.setHorizontalAlignment(JLabel.RIGHT);
-        //title.setAlignmentX(RIGHT_ALIGNMENT);
         title.setFont(googleFont);
 
         upperPanel.add(Box.createRigidArea(new Dimension(0, 100)));
@@ -154,37 +157,39 @@ public class vPrincipal extends JFrame {
         centerPanel.add(buttonExit);
 
         add(centerPanel, BorderLayout.CENTER);
-        //add(downPanel, BorderLayout.SOUTH);
-        //add(panelsBar, BorderLayout.NORTH);
 
+        /* Configuración de la posición del frame en la pantalla, ademas de su visibilidad, y la acción a ejercer al
+           cerrar la ventana, que en este caso es parar la ejecución del programa.
+         */
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
+    //Permite cerrar la ventana y abrir la anterior principal
     private void close(){
         this.setVisible(false);
         vLogin.setVisible(true);
     }
 
+    //Permite cerrar la ventana y abrir una nueva instancia del frame de creditos
     private void openCredits(){
         this.setVisible(false);
         new vCredits(control, this);
     }
 
+    /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
+    superior, por medio del uso de nombres para cada boton permite hacer una accion diferente*/
     public class ListenerP implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
 
-            //button.setActionCommand("createUser");
-            //button.addActionListener(window.getEvents());
             if (act.equals("salir")) {
                 close();
             } else if (act.equals("creditos")) {
                 openCredits();
-
             }
         }
     }

@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("ALL")
+//Instancia de la clase como un frame de la libreria java swing
 public class vRegistro extends JFrame {
 
     private JLabel title;
@@ -20,6 +22,10 @@ public class vRegistro extends JFrame {
     private Font googleFont2;
 
     public vRegistro(){
+        /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
+           el tipo de layout, el color de fondo y el tipo de letra a usar, ademas del posicionamiento de los componentes
+           dentro del frame
+        */
         setTitle("Inicio Sesion");
         setSize(700, 500);
         setResizable(false);
@@ -44,11 +50,9 @@ public class vRegistro extends JFrame {
         row2.setBackground(Color.WHITE);
 
         user = new JLabel("Usuario:      ");
-        //user.setHorizontalAlignment(JLabel.CENTER);
         user.setFont(googleFont);
 
         userfield = new JTextField();
-        //userfield.setHorizontalAlignment(JTextField.CENTER);
         userfield.setFont(googleFont2);
         userfield.setMaximumSize(new Dimension(250,100));
 
@@ -58,11 +62,9 @@ public class vRegistro extends JFrame {
         row1.add(userfield);
 
         pass = new JLabel("Contraseña:");
-        //pass.setHorizontalAlignment(JLabel.CENTER);
         pass.setFont(googleFont);
 
         passfield = new JPasswordField();
-        //passfield.setHorizontalAlignment(JPasswordField.CENTER);
         passfield.setFont(googleFont);
         passfield.setMaximumSize(new Dimension(250,50));
 
@@ -77,7 +79,6 @@ public class vRegistro extends JFrame {
         login.setFont(googleFont);
         login.setBackground(Color.ORANGE);
 
-
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
         upperPanel.setMaximumSize(new Dimension(700,100));
@@ -88,8 +89,6 @@ public class vRegistro extends JFrame {
 
         upperPanel.add(Box.createRigidArea(new Dimension(0, 100)));
         upperPanel.add(title);
-
-
 
         centerPanel = new JPanel();
         centerPanel.setBackground(Color.WHITE);
@@ -106,15 +105,14 @@ public class vRegistro extends JFrame {
         centerPanel.add(login);
 
         add(centerPanel, BorderLayout.CENTER);
-        //add(downPanel, BorderLayout.SOUTH);
-        //add(panelsBar, BorderLayout.NORTH);
 
+        /* Configuración de la posición del frame en la pantalla, ademas de su visibilidad, y la acción a ejercer al
+           cerrar la ventana, que en este caso es parar la ejecución del programa.
+         */
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-
-
 
 }

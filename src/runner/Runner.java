@@ -2,13 +2,11 @@ package runner;
 
 import control.Control;
 
+@SuppressWarnings("ALL")
 public class Runner {
 
+    //Permite iniciar el programa a partir de la instancia de una nueva instancia de Control
     public static void main(String[] args) {
-        Control c = new Control();
-        //c.login("admi", "x");
-        //c.login("admin", "x");
-        //c.login("admin", "admin");
-
+        new Control();
     }
 }

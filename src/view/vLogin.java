@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("ALL")
 public class vLogin extends JFrame {
 
     private ListenerLogin listener;
@@ -26,8 +27,16 @@ public class vLogin extends JFrame {
     private Font googleFont2;
 
     public vLogin(Control control){
+
+        /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
+           como una clase interna
+        */
         this.control = control;
         listener = new ListenerLogin();
+
+        /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
+           el tipo de layout, el color de fondo y el tipo de letra a usar
+        */
         setTitle("Inicio Sesion");
         setSize(700, 500);
         setResizable(false);
@@ -52,17 +61,11 @@ public class vLogin extends JFrame {
         row2.setBackground(Color.WHITE);
 
         user = new JLabel("Usuario:      ");
-        //user.setHorizontalAlignment(JLabel.CENTER);
         user.setFont(googleFont);
 
         userfield = new JTextField();
-        //userfield.setHorizontalAlignment(JTextField.CENTER);
         userfield.setFont(googleFont2);
         userfield.setMaximumSize(new Dimension(250,100));
-
-        //*******************************
-        //userfield.getText();
-        //*******************************
 
         row1.add(Box.createRigidArea(new Dimension(100, 0)));
         row1.add(user);
@@ -70,17 +73,11 @@ public class vLogin extends JFrame {
         row1.add(userfield);
 
         pass = new JLabel("Contraseña:");
-        //pass.setHorizontalAlignment(JLabel.CENTER);
         pass.setFont(googleFont);
 
         passfield = new JPasswordField();
-        //passfield.setHorizontalAlignment(JPasswordField.CENTER);
         passfield.setFont(googleFont);
         passfield.setMaximumSize(new Dimension(250,50));
-
-        //*******************************
-        //passfield.getPassword().toString();
-        //*******************************
 
         row2.add(Box.createRigidArea(new Dimension(100, 0)));
         row2.add(pass);
@@ -122,12 +119,16 @@ public class vLogin extends JFrame {
 
         add(centerPanel, BorderLayout.CENTER);
 
+        /* Configuración de la posición del frame en la pantalla, ademas de su visibilidad, y la acción a ejercer al
+           cerrar la ventana, que en este caso es parar la ejecución del programa.
+         */
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
+    //Permite cerrar la ventana y abrir la anterior principal
     private void close(){
         userfield.setText("");
         passfield.setText("");
@@ -135,6 +136,7 @@ public class vLogin extends JFrame {
         setVisible(false);
     }
 
+    // Clase interna que implementa el escucha de las acciones a ejecutar con el boton que se encuentra en la clase
     public class ListenerLogin implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
