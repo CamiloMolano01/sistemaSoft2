@@ -1,10 +1,16 @@
 package view;
 
+import control.Control;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class vLogin extends JFrame {
 
+    private ListenerLogin listener;
+    private Control control;
     private JLabel title;
     private JLabel welcome;
     private JLabel user;
@@ -19,7 +25,9 @@ public class vLogin extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vLogin(){
+    public vLogin(Control control){
+        this.control = control;
+        listener = new ListenerLogin();
         setTitle("Inicio Sesion");
         setSize(700, 500);
         setResizable(false);
@@ -80,6 +88,7 @@ public class vLogin extends JFrame {
         row2.add(passfield);
 
         login = new JButton("Iniciar sesión");
+        login.addActionListener(listener);
         login.setHorizontalAlignment(JLabel.CENTER);
         login.setAlignmentX(CENTER_ALIGNMENT);
         login.setFont(googleFont);
@@ -97,8 +106,6 @@ public class vLogin extends JFrame {
         upperPanel.add(Box.createRigidArea(new Dimension(0, 100)));
         upperPanel.add(title);
 
-
-
         centerPanel = new JPanel();
         centerPanel.setBackground(Color.WHITE);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -114,8 +121,6 @@ public class vLogin extends JFrame {
         centerPanel.add(login);
 
         add(centerPanel, BorderLayout.CENTER);
-        //add(downPanel, BorderLayout.SOUTH);
-        //add(panelsBar, BorderLayout.NORTH);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
@@ -123,6 +128,20 @@ public class vLogin extends JFrame {
         setVisible(true);
     }
 
+    private void close(){
+        userfield.setText("");
+        passfield.setText("");
+        new vPrincipal(control, this);
+        setVisible(false);
+    }
 
+    public class ListenerLogin implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(control.login(userfield.getText(), String.valueOf(passfield.getPassword()))){
+                close();
+            }
+        }
+    }
 
 }

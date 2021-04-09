@@ -1,16 +1,14 @@
 package runner;
 
-import connection.ConnSQL;
-import view.vLogin;
-import view.vPrincipal;
+import control.Control;
 
 public class Runner {
 
     public static void main(String[] args) {
-        new vLogin();
-        new vPrincipal();
+        Control c = new Control();
+        //c.login("admi", "x");
+        //c.login("admin", "x");
+        //c.login("admin", "admin");
 
-        ConnSQL con = new ConnSQL();         //Creamos un objeto de tipo conexion
-        con.conectado();
     }
 }

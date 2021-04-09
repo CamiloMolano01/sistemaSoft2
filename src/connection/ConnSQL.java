@@ -1,6 +1,7 @@
 package connection;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnSQL {
 
@@ -28,10 +29,28 @@ public class ConnSQL {
         return con;
     }
 
-    public void desconectar(){     //Por seguridad, cuando terminemos sentencias, cerramos la conexion o si la necesitamos cerrar por otro caso
-        con = null;                  //Ahora de nuevo con sera null
+    public void desconectar(){
+        con = null;
         System.out.println("La conexion la BD se ha cerrado");
     }
 
+    public ArrayList<String> getData(String sentence, String column){
+        ArrayList<String> datalist = new ArrayList<>();
+
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                datalist.add(rs.getString(column));
+            }
+
+        } catch (SQLException sqle) {
+            //System.out.println("Error en la ejecución:"
+                    //+ sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        System.out.println(sentence);
+        System.out.println(datalist);
+        return datalist;
+    }
 
 }

@@ -1,9 +1,17 @@
 package view;
 
+import control.Control;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class vPrincipal extends JFrame {
+
+    private ListenerP listener;
+    private Control control;
+    private vLogin vLogin;
 
     private JLabel title;
     private JButton buttonCredits;
@@ -21,7 +29,11 @@ public class vPrincipal extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vPrincipal(){
+    public vPrincipal(Control control, vLogin vLogin){
+
+        this.control = control;
+        this.vLogin = vLogin;
+        listener = new ListenerP();
         setTitle("Principal");
         setSize(700, 500);
         setResizable(false);
@@ -49,6 +61,8 @@ public class vPrincipal extends JFrame {
         row3.setAlignmentX(CENTER_ALIGNMENT);
 
         buttonCredits = new JButton("Creditos");
+        buttonCredits.setActionCommand("creditos");
+        buttonCredits.addActionListener(listener);
         buttonCredits.setFont(googleFont2);
         buttonCredits.setPreferredSize(new Dimension(180,30));
         buttonCredits.setMaximumSize(new Dimension(180,30));
@@ -92,6 +106,8 @@ public class vPrincipal extends JFrame {
         buttonUsers.setBackground(Color.WHITE);
 
         buttonExit = new JButton("Salir");
+        buttonExit.setActionCommand("salir");
+        buttonExit.addActionListener(listener);
         buttonExit.setFont(googleFont2);
         buttonExit.setAlignmentX(CENTER_ALIGNMENT);
         buttonExit.setBackground(Color.WHITE);
@@ -147,7 +163,31 @@ public class vPrincipal extends JFrame {
         setVisible(true);
     }
 
+    private void close(){
+        this.setVisible(false);
+        vLogin.setVisible(true);
+    }
 
+    private void openCredits(){
+        this.setVisible(false);
+        new vCredits(control, this);
+    }
+
+    public class ListenerP implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String act = e.getActionCommand();
+
+            //button.setActionCommand("createUser");
+            //button.addActionListener(window.getEvents());
+            if (act.equals("salir")) {
+                close();
+            } else if (act.equals("creditos")) {
+                openCredits();
+
+            }
+        }
+    }
 
 }
 
