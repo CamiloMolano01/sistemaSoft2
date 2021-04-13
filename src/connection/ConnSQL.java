@@ -11,7 +11,6 @@ public class ConnSQL {
 
     //Inicializo en null el objeto de conexión
     Connection con = null;
-
     /* Metodo constructor donde se realiza la conexión con la base de datos donde se
        ingresa el usuario y contraseña como metodo de verificación para acceder a la misma */
     public ConnSQL() {
