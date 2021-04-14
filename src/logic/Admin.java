@@ -3,8 +3,13 @@ import java.util.Date;
 
 public class Admin extends Cuenta{
 	
-	public boolean createPerson(String name, String fname, String email, Integer id, AccountType type) {
-		Person p = new Person(name, fname, email, id, type);
+	public Admin(String user, String pass, AccountType type, Boolean status) {
+		super(user, pass, type, status);
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean createPerson(String name, String fname, String email) {
+		Person p = new Person(name, fname, email);
 		//enviar persona a la base de datos como un nuevo registro
 		//realizar el proceso de verificacion de registros repetidos
 		return false;
