@@ -3,6 +3,11 @@ import java.util.Date;
 
 public class User extends Cuenta{
 	
+	public User(String user, String pass, AccountType type, Boolean status) {
+		super(user, pass, type, status);
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean createMenu(Date date, String[] contents) {
 		Menu m = new Menu(date, contents);
 		//enviar el nuevo menu a la base de datos
