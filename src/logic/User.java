@@ -26,5 +26,4 @@ public class User extends Cuenta{
 	public void viewMenu(){
 		//accede a la base de datos y recupera el menu del dia
 	}
-
 }
