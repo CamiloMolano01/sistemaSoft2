@@ -38,6 +38,7 @@ public class ConnSQL {
     }
 
 
+
     /* Acepta como parametro una sentencia sql en formato String y una columna de la tabla en cuestion
        igualmente en formato String, retorna las columnas obtenidas en la consulta de la base de datos */
     public ArrayList<String> getData(String sentence, String column){
@@ -57,4 +58,38 @@ public class ConnSQL {
         return datalist;
     }
 
+    public ArrayList<String> getData(String sentence){
+        ArrayList<String> datalist = new ArrayList<>();
+
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                datalist.add(rs.getString("Codigo"));
+                datalist.add(rs.getString("Name"));
+                datalist.add(rs.getString("LastName"));
+            }
+
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return datalist;
+    }
+
+    public void setData(String sentence) {
+        //ArrayList<String> datalist = new ArrayList<>();
+
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            stmt.executeUpdate();
+
+            /*while (rs.next()) {
+                datalist.add(rs.getString(column));
+            }*/
+
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+    }
 }

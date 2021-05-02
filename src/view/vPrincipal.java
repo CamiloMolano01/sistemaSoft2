@@ -1,6 +1,7 @@
 package view;
 
 import control.Control;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class vPrincipal extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vPrincipal(Control control, vLogin vLogin){
+    public vPrincipal(Control control, vLogin vLogin) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -48,18 +49,18 @@ public class vPrincipal extends JFrame {
         googleFont2 = new Font("Open Sans", Font.BOLD, 15);
 
         row1 = new JPanel();
-        row1.setMaximumSize(new Dimension(700,30));
+        row1.setMaximumSize(new Dimension(700, 30));
         row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
         row1.setBackground(Color.WHITE);
 
         row2 = new JPanel();
-        row2.setMaximumSize(new Dimension(700,30));
+        row2.setMaximumSize(new Dimension(700, 30));
         row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
         row2.setBackground(Color.WHITE);
         row2.setAlignmentX(CENTER_ALIGNMENT);
 
         row3 = new JPanel();
-        row3.setMaximumSize(new Dimension(700,30));
+        row3.setMaximumSize(new Dimension(700, 30));
         row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
         row3.setBackground(Color.WHITE);
         row3.setAlignmentX(CENTER_ALIGNMENT);
@@ -68,44 +69,48 @@ public class vPrincipal extends JFrame {
         buttonCredits.setActionCommand("creditos");
         buttonCredits.addActionListener(listener);
         buttonCredits.setFont(googleFont2);
-        buttonCredits.setPreferredSize(new Dimension(180,30));
-        buttonCredits.setMaximumSize(new Dimension(180,30));
-        buttonCredits.setMinimumSize(new Dimension(180,30));
+        buttonCredits.setPreferredSize(new Dimension(180, 30));
+        buttonCredits.setMaximumSize(new Dimension(180, 30));
+        buttonCredits.setMinimumSize(new Dimension(180, 30));
         buttonCredits.setBackground(Color.WHITE);
 
         buttonConsume = new JButton("Consumo");
+        buttonConsume.setActionCommand("consumo");
+        buttonConsume.addActionListener(listener);
         buttonConsume.setFont(googleFont2);
-        buttonConsume.setPreferredSize(new Dimension(180,30));
-        buttonConsume.setMaximumSize(new Dimension(180,30));
-        buttonConsume.setMinimumSize(new Dimension(180,30));
+        buttonConsume.setPreferredSize(new Dimension(180, 30));
+        buttonConsume.setMaximumSize(new Dimension(180, 30));
+        buttonConsume.setMinimumSize(new Dimension(180, 30));
         buttonConsume.setBackground(Color.WHITE);
 
         buttonGeneral = new JButton("Rep. General");
         buttonGeneral.setFont(googleFont2);
-        buttonGeneral.setPreferredSize(new Dimension(180,30));
-        buttonGeneral.setMaximumSize(new Dimension(180,30));
-        buttonGeneral.setMinimumSize(new Dimension(180,30));
+        buttonGeneral.setPreferredSize(new Dimension(180, 30));
+        buttonGeneral.setMaximumSize(new Dimension(180, 30));
+        buttonGeneral.setMinimumSize(new Dimension(180, 30));
         buttonGeneral.setBackground(Color.WHITE);
 
         buttonIndividual = new JButton("Rep. Individual");
+        buttonIndividual.setActionCommand("repInd");
+        buttonIndividual.addActionListener(listener);
         buttonIndividual.setFont(googleFont2);
-        buttonIndividual.setPreferredSize(new Dimension(180,30));
-        buttonIndividual.setMaximumSize(new Dimension(180,30));
-        buttonIndividual.setMinimumSize(new Dimension(180,30));
+        buttonIndividual.setPreferredSize(new Dimension(180, 30));
+        buttonIndividual.setMaximumSize(new Dimension(180, 30));
+        buttonIndividual.setMinimumSize(new Dimension(180, 30));
         buttonIndividual.setBackground(Color.WHITE);
 
         buttonMenu = new JButton("Menu");
         buttonMenu.setFont(googleFont2);
-        buttonMenu.setPreferredSize(new Dimension(180,30));
-        buttonMenu.setMaximumSize(new Dimension(180,30));
-        buttonMenu.setMinimumSize(new Dimension(180,30));
+        buttonMenu.setPreferredSize(new Dimension(180, 30));
+        buttonMenu.setMaximumSize(new Dimension(180, 30));
+        buttonMenu.setMinimumSize(new Dimension(180, 30));
         buttonMenu.setBackground(Color.WHITE);
 
         buttonUsers = new JButton("Usuarios");
         buttonUsers.setFont(googleFont2);
-        buttonUsers.setPreferredSize(new Dimension(180,30));
-        buttonUsers.setMaximumSize(new Dimension(180,30));
-        buttonUsers.setMinimumSize(new Dimension(180,30));
+        buttonUsers.setPreferredSize(new Dimension(180, 30));
+        buttonUsers.setMaximumSize(new Dimension(180, 30));
+        buttonUsers.setMinimumSize(new Dimension(180, 30));
         buttonUsers.setBackground(Color.WHITE);
 
         buttonExit = new JButton("Salir");
@@ -132,7 +137,7 @@ public class vPrincipal extends JFrame {
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(700,100));
+        upperPanel.setMaximumSize(new Dimension(700, 100));
 
         title = new JLabel("Página Principal");
         title.setFont(googleFont);
@@ -166,15 +171,25 @@ public class vPrincipal extends JFrame {
     }
 
     //Permite cerrar la ventana y abrir la anterior principal
-    private void close(){
+    private void close() {
         this.setVisible(false);
         vLogin.setVisible(true);
     }
 
     //Permite cerrar la ventana y abrir una nueva instancia del frame de creditos
-    private void openCredits(){
+    private void openCredits() {
         this.setVisible(false);
         new vCredits(control, this);
+    }
+
+    private void openConsume() {
+        this.setVisible(false);
+        new vConsumo(control, this);
+    }
+
+    private void openRepInd(){
+        this.setVisible(false);
+        new vRepInd(control, this);
     }
 
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
@@ -188,6 +203,10 @@ public class vPrincipal extends JFrame {
                 close();
             } else if (act.equals("creditos")) {
                 openCredits();
+            } else if (act.equals("consumo")) {
+                openConsume();
+            } else if (act.equals("repInd")) {
+                openRepInd();
             }
         }
     }

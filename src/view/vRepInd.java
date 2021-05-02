@@ -1,13 +1,16 @@
 package view;
 
 import control.Control;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
-public class vCredits extends JFrame {
+//Instancia de la clase como un frame de la libreria java swing
+public class vRepInd extends JFrame {
 
     private ListenerC listener;
     private Control control;
@@ -17,21 +20,19 @@ public class vCredits extends JFrame {
     private JButton buttonCredits;
 
     private JLabel labelCode;
-    private JLabel labelQuantity;
     private JTextField textCode;
-    private JTextField textQuantity;
     private JButton buttonBack;
-    private JButton buttonActual;
-    private JButton buttonUpdate;
+    private JButton buttonCharge;
+    private JLabel data;
+
     private JPanel centerPanel;
     private JPanel upperPanel;
     private JPanel row1;
     private JPanel row2;
-    private JPanel row3;
     private Font googleFont;
     private Font googleFont2;
 
-    public vCredits(Control control, vPrincipal vPrincipal) {
+    public vRepInd(Control control, vPrincipal vPrincipal) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -42,7 +43,7 @@ public class vCredits extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Cargar creditos");
+        setTitle("Reporte individual");
         setSize(700, 500);
         setResizable(false);
         setLayout(new BorderLayout());
@@ -60,13 +61,12 @@ public class vCredits extends JFrame {
         row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
         row2.setBackground(Color.WHITE);
 
-        row3 = new JPanel();
-        row3.setMaximumSize(new Dimension(700,30));
-        row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
-        row3.setBackground(Color.WHITE);
-
         labelCode = new JLabel("Codigo:      ");
         labelCode.setFont(googleFont);
+
+        data = new JLabel("ddd");
+        data.setFont(googleFont2);
+        data.setPreferredSize(new Dimension(100,250));
 
         textCode = new JTextField();
         textCode.setFont(googleFont2);
@@ -77,18 +77,6 @@ public class vCredits extends JFrame {
         row1.add(Box.createRigidArea(new Dimension(50, 0)));
         row1.add(textCode);
 
-        labelQuantity = new JLabel("Cantidad:   ");
-        labelQuantity.setFont(googleFont);
-
-        textQuantity = new JTextField();
-        textQuantity.setFont(googleFont);
-        textQuantity.setMaximumSize(new Dimension(250,50));
-
-        row2.add(Box.createRigidArea(new Dimension(100, 0)));
-        row2.add(labelQuantity);
-        row2.add(Box.createRigidArea(new Dimension(50, 0)));
-        row2.add(textQuantity);
-
         buttonBack = new JButton("Atras");
         buttonBack.addActionListener(listener);
         buttonBack.setActionCommand("atras");
@@ -97,28 +85,18 @@ public class vCredits extends JFrame {
         buttonBack.setFont(googleFont);
         buttonBack.setBackground(Color.GRAY);
 
-        buttonActual = new JButton("Actual");
-        buttonActual.addActionListener(listener);
-        buttonActual.setActionCommand("actual");
-        buttonActual.setHorizontalAlignment(JLabel.CENTER);
-        buttonActual.setAlignmentX(CENTER_ALIGNMENT);
-        buttonActual.setFont(googleFont);
-        buttonActual.setBackground(Color.ORANGE);
+        buttonCharge = new JButton("Cargar estudiante");
+        buttonCharge.addActionListener(listener);
+        buttonCharge.setActionCommand("cargar");
+        buttonCharge.setHorizontalAlignment(JLabel.CENTER);
+        buttonCharge.setAlignmentX(CENTER_ALIGNMENT);
+        buttonCharge.setFont(googleFont);
+        buttonCharge.setBackground(Color.ORANGE);
 
-        buttonUpdate = new JButton("Actualizar");
-        buttonUpdate.addActionListener(listener);
-        buttonUpdate.setActionCommand("cargar");
-        buttonUpdate.setHorizontalAlignment(JLabel.CENTER);
-        buttonUpdate.setAlignmentX(CENTER_ALIGNMENT);
-        buttonUpdate.setFont(googleFont);
-        buttonUpdate.setBackground(Color.ORANGE);
-
-        row3.add(Box.createRigidArea(new Dimension(100, 0)));
-        row3.add(buttonBack);
-        row3.add(Box.createRigidArea(new Dimension(50, 0)));
-        row3.add(buttonActual);
-        row3.add(Box.createRigidArea(new Dimension(50, 0)));
-        row3.add(buttonUpdate);
+        row2.add(Box.createRigidArea(new Dimension(100, 0)));
+        row2.add(buttonBack);
+        row2.add(Box.createRigidArea(new Dimension(100, 0)));
+        row2.add(buttonCharge);
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
@@ -136,12 +114,13 @@ public class vCredits extends JFrame {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 100)));
-        centerPanel.add(row1);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        centerPanel.add(row1);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        centerPanel.add(data);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         centerPanel.add(row2);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
-        centerPanel.add(row3);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -160,6 +139,11 @@ public class vCredits extends JFrame {
         vPrincipal.setVisible(true);
     }
 
+    private void putData(String code){
+        ArrayList<String> dat = control.getData(code);
+        data.setText("Nombre: " + dat.get(1) + " " + dat.get(2) + "\n");
+    }
+
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
     superior, por medio del uso de nombres para cada boton permite hacer una accion diferente*/
     public class ListenerC implements ActionListener {
@@ -171,9 +155,9 @@ public class vCredits extends JFrame {
                 clean();
                 close();
             } else if (act.equals("cargar")){
-                control.addCredits(textCode.getText(), textQuantity.getText());
-                JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
-                textQuantity.setText("");
+                putData(textCode.getText());
+                //control.addCredits(textCode.getText(), "-1");
+                //JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             } else if (act.equals("actual")){
                 JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             }
@@ -181,8 +165,7 @@ public class vCredits extends JFrame {
     }
 
     private void clean(){
-        textQuantity.setText("");
         textCode.setText("");
     }
-}
 
+}

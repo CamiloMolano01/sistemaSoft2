@@ -54,9 +54,20 @@ public class Control {
         if (!existUser(code, codes)) {
             return "Estudiante no encontrado";
         } else {
-            return "Cantidad de creditos: " + con.getData("SELECT * FROM estudiante where Codigo = "
-                    + "'" + code + "'", "Cant_Creditos").get(0);
+            return "Cantidad de creditos: " + con.getData("SELECT * FROM estudiante where Codigo = '"
+                    + code + "'", "Cant_Creditos").get(0);
         }
     }
+
+    public ArrayList<String> getData(String code){
+        return con.getData("SELECT * FROM estudiante where Codigo='"+code+"'");
+    }
+
+    public void addCredits(String code, String quantity) {
+        int c = Integer.parseInt(con.getData("SELECT * FROM estudiante where Codigo='" + code + "' ",
+                "Cant_Creditos").get(0)) + Integer.parseInt(quantity);
+        con.setData("UPDATE estudiante set Cant_Creditos='" + c + "' where Codigo='" + code + "'");
+    }
+
 
 }
