@@ -60,16 +60,13 @@ public class ConnSQL {
 
     public ArrayList<String> getData(String sentence){
         ArrayList<String> datalist = new ArrayList<>();
-
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()){
                 datalist.add(rs.getString("Codigo"));
                 datalist.add(rs.getString("Name"));
                 datalist.add(rs.getString("LastName"));
             }
-
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
                     + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -78,15 +75,8 @@ public class ConnSQL {
     }
 
     public void setData(String sentence) {
-        //ArrayList<String> datalist = new ArrayList<>();
-
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             stmt.executeUpdate();
-
-            /*while (rs.next()) {
-                datalist.add(rs.getString(column));
-            }*/
-
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
                     + sqle.getErrorCode() + " " + sqle.getMessage());
