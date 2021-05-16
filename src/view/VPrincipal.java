@@ -8,11 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("ALL")
-public class vPrincipal extends JFrame {
+public class VPrincipal extends JFrame {
 
     private ListenerP listener;
     private Control control;
-    private vLogin vLogin;
+    private VLogin vLogin;
     private JLabel title;
     private JButton buttonCredits;
     private JButton buttonConsume;
@@ -29,7 +29,7 @@ public class vPrincipal extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vPrincipal(Control control, vLogin vLogin) {
+    public VPrincipal(Control control, VLogin vLogin) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -41,7 +41,7 @@ public class vPrincipal extends JFrame {
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
         setTitle("Principal");
-        setSize(700, 500);
+        setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -100,6 +100,8 @@ public class vPrincipal extends JFrame {
         buttonIndividual.setBackground(Color.WHITE);
 
         buttonMenu = new JButton("Menu");
+        buttonMenu.setActionCommand("menu");
+        buttonMenu.addActionListener(listener);
         buttonMenu.setFont(googleFont2);
         buttonMenu.setPreferredSize(new Dimension(180, 30));
         buttonMenu.setMaximumSize(new Dimension(180, 30));
@@ -137,7 +139,7 @@ public class vPrincipal extends JFrame {
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(700, 100));
+        upperPanel.setMaximumSize(new Dimension(800, 100));
 
         title = new JLabel("Página Principal");
         title.setFont(googleFont);
@@ -179,17 +181,22 @@ public class vPrincipal extends JFrame {
     //Permite cerrar la ventana y abrir una nueva instancia del frame de creditos
     private void openCredits() {
         this.setVisible(false);
-        new vCredits(control, this);
+        new VCredits(control, this);
     }
 
     private void openConsume() {
         this.setVisible(false);
-        new vConsumo(control, this);
+        new VConsumo(control, this);
     }
 
     private void openRepInd(){
         this.setVisible(false);
-        new vRepInd(control, this);
+        new VRepInd(control, this);
+    }
+
+    private void openMenu(){
+        this.setVisible(false);
+        new VMenu(control, this);
     }
 
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
@@ -207,6 +214,8 @@ public class vPrincipal extends JFrame {
                 openConsume();
             } else if (act.equals("repInd")) {
                 openRepInd();
+            } else if (act.equals("menu")) {
+                openMenu();
             }
         }
     }

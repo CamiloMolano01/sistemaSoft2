@@ -21,7 +21,7 @@ public class Cuenta{
 	}
 	
 	public void start() {
-		if (status == true) {
+		if (status) {
 			if (type == AccountType.ADMIN) {
 				//Admin admin = new Admin();
 				//abrir la ventana que solo admin tiene acceso

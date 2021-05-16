@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("ALL")
-public class vCredits extends JFrame {
+public class VCredits extends JFrame {
 
     private ListenerC listener;
     private Control control;
-    private vPrincipal vPrincipal;
+    private VPrincipal vPrincipal;
 
     private JLabel title;
     private JButton buttonCredits;
@@ -31,7 +31,7 @@ public class vCredits extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vCredits(Control control, vPrincipal vPrincipal) {
+    public VCredits(Control control, VPrincipal vPrincipal) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -43,7 +43,7 @@ public class vCredits extends JFrame {
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
         setTitle("Cargar creditos");
-        setSize(700, 500);
+        setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -122,9 +122,9 @@ public class vCredits extends JFrame {
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(700,100));
+        upperPanel.setMaximumSize(new Dimension(800,100));
 
-        title = new JLabel("                         Creditos");
+        title = new JLabel("                                                                          Creditos");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(googleFont);
 

@@ -1,9 +1,9 @@
 package control;
 
 import connection.ConnSQL;
-import view.vLogin;
+import view.VLogin;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 public class Control {
@@ -12,11 +12,11 @@ public class Control {
 
     public Control() {
         con = new ConnSQL(); //Creación de la conexión con la base de datos SQL en mySQL
-        new vLogin(this); //
+        new VLogin(this); //
     }
 
     //Permite conocer si existe o no un usuario con un nombre dado
-    private boolean existUser(String user, ArrayList<String> names) {
+    private boolean existUser(String user, List<String> names) {
         for (int i = 0; i < names.size(); i++) {
             if (user.equals(names.get(i))) {
                 return true;
@@ -29,7 +29,7 @@ public class Control {
     coincidencias respecto al nombre de usuario y su respectiva contraseña*/
     public boolean login(String user, String pass) {
         //Escribimos la sentencia SQL y la columna especifica que deseamos obtener
-        ArrayList<String> names = con.getData("SELECT * FROM usuario", "Username");
+        List<String> names = con.getData("SELECT * FROM usuario", "Username");
         //Se obtiene la lista de usuarios de la bd
 
         if (!existUser(user, names)) {
@@ -49,7 +49,7 @@ public class Control {
     /*Similar al anterior con un codigo se hace el cruce en la base de datos con el fin de encontrar
     coincidencias respecto al estudiante identificado con el codigo ingresado y sus creditos disponibles*/
     public String getCredits(String code) {
-        ArrayList<String> codes = con.getData("SELECT * FROM estudiante", "Codigo");
+        List<String> codes = con.getData("SELECT * FROM estudiante", "Codigo");
 
         if (!existUser(code, codes)) {
             return "Estudiante no encontrado";
@@ -59,7 +59,7 @@ public class Control {
         }
     }
 
-    public ArrayList<String> getData(String code){
+    public List<String> getData(String code){
         return con.getData("SELECT * FROM estudiante where Codigo='"+code+"'");
     }
 

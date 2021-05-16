@@ -2,6 +2,7 @@ package connection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 public class ConnSQL {
@@ -15,7 +16,7 @@ public class ConnSQL {
        ingresa el usuario y contraseña como metodo de verificación para acceder a la misma */
     public ConnSQL() {
         try{
-            con = DriverManager.getConnection(url,"root","");
+            con = DriverManager.getConnection(url,"admin","aaDMIN12");
             if (con!=null){
                 System.out.println("Conexión a base de datos funcionando");
             }
@@ -41,8 +42,8 @@ public class ConnSQL {
 
     /* Acepta como parametro una sentencia sql en formato String y una columna de la tabla en cuestion
        igualmente en formato String, retorna las columnas obtenidas en la consulta de la base de datos */
-    public ArrayList<String> getData(String sentence, String column){
-        ArrayList<String> datalist = new ArrayList<>();
+    public List<String> getData(String sentence, String column){
+        List<String> datalist = new ArrayList<>();
 
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             ResultSet rs = stmt.executeQuery();

@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("ALL")
-public class vLogin extends JFrame {
+public class VLogin extends JFrame {
 
     private ListenerLogin listener;
     private Control control;
@@ -25,7 +25,7 @@ public class vLogin extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public vLogin(Control control){
+    public VLogin(Control control){
 
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
@@ -37,7 +37,7 @@ public class vLogin extends JFrame {
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
         setTitle("Inicio Sesion");
-        setSize(700, 500);
+        setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -93,7 +93,7 @@ public class vLogin extends JFrame {
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(700,100));
+        upperPanel.setMaximumSize(new Dimension(800,100));
 
         title = new JLabel("Sistema de Administración de Creditos - SAC");
         title.setHorizontalAlignment(JLabel.CENTER);
@@ -131,7 +131,7 @@ public class vLogin extends JFrame {
     private void close(){
         userfield.setText("");
         passfield.setText("");
-        new vPrincipal(control, this);
+        new VPrincipal(control, this);
         setVisible(false);
     }
 

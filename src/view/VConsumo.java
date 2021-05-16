@@ -6,33 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
-//Instancia de la clase como un frame de la libreria java swing
-public class vRepInd extends JFrame {
+public class VConsumo extends JFrame {
 
     private ListenerC listener;
     private Control control;
-    private vPrincipal vPrincipal;
+    private VPrincipal vPrincipal;
 
-    private JLabel title;
-    private JButton buttonCredits;
-
+    private JLabel jtitle;
     private JLabel labelCode;
     private JTextField textCode;
     private JButton buttonBack;
-    private JButton buttonCharge;
-    private JLabel data;
-
+    private JButton buttonActual;
+    private JButton buttonConsume;
     private JPanel centerPanel;
     private JPanel upperPanel;
     private JPanel row1;
     private JPanel row2;
+    private JPanel row3;
     private Font googleFont;
     private Font googleFont2;
 
-    public vRepInd(Control control, vPrincipal vPrincipal) {
+    public VConsumo(Control control, VPrincipal vPrincipal) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -43,8 +39,8 @@ public class vRepInd extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Reporte individual");
-        setSize(700, 500);
+        setTitle("Consumo");
+        setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -61,12 +57,13 @@ public class vRepInd extends JFrame {
         row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
         row2.setBackground(Color.WHITE);
 
+        row3 = new JPanel();
+        row3.setMaximumSize(new Dimension(700,30));
+        row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
+        row3.setBackground(Color.WHITE);
+
         labelCode = new JLabel("Codigo:      ");
         labelCode.setFont(googleFont);
-
-        data = new JLabel("ddd");
-        data.setFont(googleFont2);
-        data.setPreferredSize(new Dimension(100,250));
 
         textCode = new JTextField();
         textCode.setFont(googleFont2);
@@ -85,42 +82,51 @@ public class vRepInd extends JFrame {
         buttonBack.setFont(googleFont);
         buttonBack.setBackground(Color.GRAY);
 
-        buttonCharge = new JButton("Cargar estudiante");
-        buttonCharge.addActionListener(listener);
-        buttonCharge.setActionCommand("cargar");
-        buttonCharge.setHorizontalAlignment(JLabel.CENTER);
-        buttonCharge.setAlignmentX(CENTER_ALIGNMENT);
-        buttonCharge.setFont(googleFont);
-        buttonCharge.setBackground(Color.ORANGE);
+        buttonActual = new JButton("Actual");
+        buttonActual.addActionListener(listener);
+        buttonActual.setActionCommand("actual");
+        buttonActual.setHorizontalAlignment(JLabel.CENTER);
+        buttonActual.setAlignmentX(CENTER_ALIGNMENT);
+        buttonActual.setFont(googleFont);
+        buttonActual.setBackground(Color.ORANGE);
 
-        row2.add(Box.createRigidArea(new Dimension(100, 0)));
-        row2.add(buttonBack);
-        row2.add(Box.createRigidArea(new Dimension(100, 0)));
-        row2.add(buttonCharge);
+        buttonConsume = new JButton("Consumir");
+        buttonConsume.addActionListener(listener);
+        buttonConsume.setActionCommand("cargar");
+        buttonConsume.setHorizontalAlignment(JLabel.CENTER);
+        buttonConsume.setAlignmentX(CENTER_ALIGNMENT);
+        buttonConsume.setFont(googleFont);
+        buttonConsume.setBackground(Color.ORANGE);
+
+        row3.add(Box.createRigidArea(new Dimension(100, 0)));
+        row3.add(buttonBack);
+        row3.add(Box.createRigidArea(new Dimension(50, 0)));
+        row3.add(buttonActual);
+        row3.add(Box.createRigidArea(new Dimension(50, 0)));
+        row3.add(buttonConsume);
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(700,100));
+        upperPanel.setMaximumSize(new Dimension(800,100));
 
-        title = new JLabel("                         Creditos");
-        title.setHorizontalAlignment(JLabel.CENTER);
-        title.setFont(googleFont);
+        jtitle = new JLabel("                                                                          Consumo");
+        jtitle.setHorizontalAlignment(JLabel.CENTER);
+        jtitle.setFont(googleFont);
 
         upperPanel.add(Box.createRigidArea(new Dimension(0, 100)));
-        upperPanel.add(title);
+        upperPanel.add(jtitle);
 
         centerPanel = new JPanel();
         centerPanel.setBackground(Color.WHITE);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 100)));
         centerPanel.add(row1);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        centerPanel.add(data);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row2);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(row3);
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -139,11 +145,6 @@ public class vRepInd extends JFrame {
         vPrincipal.setVisible(true);
     }
 
-    private void putData(String code){
-        ArrayList<String> dat = control.getData(code);
-        data.setText("Nombre: " + dat.get(1) + " " + dat.get(2) + "\n");
-    }
-
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
     superior, por medio del uso de nombres para cada boton permite hacer una accion diferente*/
     public class ListenerC implements ActionListener {
@@ -155,9 +156,8 @@ public class vRepInd extends JFrame {
                 clean();
                 close();
             } else if (act.equals("cargar")){
-                putData(textCode.getText());
-                //control.addCredits(textCode.getText(), "-1");
-                //JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
+                control.addCredits(textCode.getText(), "-1");
+                JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             } else if (act.equals("actual")){
                 JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             }
@@ -167,5 +167,5 @@ public class vRepInd extends JFrame {
     private void clean(){
         textCode.setText("");
     }
-
 }
+
