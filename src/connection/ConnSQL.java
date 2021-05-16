@@ -59,6 +59,40 @@ public class ConnSQL {
         return datalist;
     }
 
+    public String getOneColumn(String sentence){
+        String data = "";
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) data = rs.getString(1);
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return data;
+    }
+
+    public ArrayList<String> getDataMenu(String sentence){
+        ArrayList<String> datalist = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                datalist.add(rs.getString("Tipo"));
+                datalist.add(rs.getString("Proteina"));
+                datalist.add(rs.getString("Carbohidrato"));
+                datalist.add(rs.getString("Verdura/Fruta"));
+                datalist.add(rs.getString("Sopa"));
+                datalist.add(rs.getString("Jugo"));
+                datalist.add(rs.getString("Postre"));
+            }
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return datalist;
+    }
+
+
+
     public ArrayList<String> getData(String sentence){
         ArrayList<String> datalist = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
@@ -67,6 +101,7 @@ public class ConnSQL {
                 datalist.add(rs.getString("Codigo"));
                 datalist.add(rs.getString("Name"));
                 datalist.add(rs.getString("LastName"));
+                datalist.add(rs.getString("Cant_Creditos"));
             }
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"

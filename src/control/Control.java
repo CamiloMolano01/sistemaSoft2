@@ -59,6 +59,17 @@ public class Control {
         }
     }
 
+    public String getBuyCredEst(String code){
+        return con.getOneColumn("SELECT sum(Cantidad) FROM registro where Tipo=2" +
+                " and Estudiante_ID=(SELECT Estudiante_ID from estudiante where Codigo='"+code+"')");
+    }
+
+    public String getConsumeCredEst(String code){
+        String one = con.getOneColumn("SELECT Estudiante_ID from estudiante where Codigo='"+code+"'");
+        return con.getOneColumn("SELECT sum(Cantidad) FROM registro where Tipo=1" +
+                " and Estudiante_ID='"+one+"'");
+    }
+
     public List<String> getData(String code){
         return con.getData("SELECT * FROM estudiante where Codigo='"+code+"'");
     }
@@ -67,6 +78,10 @@ public class Control {
         int c = Integer.parseInt(con.getData("SELECT * FROM estudiante where Codigo='" + code + "' ",
                 "Cant_Creditos").get(0)) + Integer.parseInt(quantity);
         con.setData("UPDATE estudiante set Cant_Creditos='" + c + "' where Codigo='" + code + "'");
+    }
+
+    public List<String> chargeMenu(String date){
+        return con.getDataMenu("SELECT * FROM menu where Fecha='"+date+"'");
     }
 
 

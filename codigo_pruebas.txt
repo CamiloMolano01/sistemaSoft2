@@ -1,0 +1,1 @@
+sonar-scanner.bat -D"sonar.projectKey=CamiloMolano01_sistemaSoft2" -D"sonar.sources=C:\Users\camil\Desktop\MATERIAS\IngSoft II\ProyectoIJ\src" -D"sonar.java.binaries=C:\Program Files\Java\jdk1.8.0_191\bin" -D"sonar.host.url=http://localhost:9000" -D"sonar.login=admin" -D"sonar.password=123"

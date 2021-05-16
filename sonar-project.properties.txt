@@ -1,0 +1,2 @@
+sonar.projectKey=CamiloMolano01_sistemaSoft2
+sonar.sources=C:\Users\camil\Desktop\MATERIAS\IngSoft II\ProyectoIJ\src
