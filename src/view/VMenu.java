@@ -103,7 +103,7 @@ public class VMenu extends JFrame {
         buttonBack.setFont(googleFont2);
         buttonBack.setBackground(Color.GRAY);
 
-        buttonCharge = new JButton("Cargar estudiante");
+        buttonCharge = new JButton("Cargar Menu");
         buttonCharge.addActionListener(listener);
         buttonCharge.setActionCommand("cargar");
         buttonCharge.setHorizontalAlignment(JLabel.CENTER);

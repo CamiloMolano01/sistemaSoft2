@@ -8,7 +8,7 @@ import java.util.List;
 public class ConnSQL {
 
     //Ingreso la dirección donde se encuentra almacenada la base de datos actualmente
-    private final String url = "jdbc:mysql://localhost/sistema_creditos";
+    private static final String url = "jdbc:mysql://mysql-cxmxlx.alwaysdata.net/cxmxlx_sistema_creditos";
 
     //Inicializo en null el objeto de conexión
     Connection con = null;
@@ -16,7 +16,7 @@ public class ConnSQL {
        ingresa el usuario y contraseña como metodo de verificación para acceder a la misma */
     public ConnSQL() {
         try{
-            con = DriverManager.getConnection(url,"admin","aaDMIN12");
+            con = DriverManager.getConnection(url,"cxmxlx","CJRbv3pTHYRCFct");
             if (con!=null){
                 System.out.println("Conexión a base de datos funcionando");
             }
