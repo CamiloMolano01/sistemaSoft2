@@ -42,7 +42,8 @@ public class VCredits extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Cargar creditos");
+        setTitle("SAC - Cargar creditos");
+        setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
@@ -94,8 +95,8 @@ public class VCredits extends JFrame {
         buttonBack.setActionCommand("atras");
         buttonBack.setHorizontalAlignment(JLabel.CENTER);
         buttonBack.setAlignmentX(CENTER_ALIGNMENT);
-        buttonBack.setFont(googleFont);
-        buttonBack.setBackground(Color.GRAY);
+        buttonBack.setFont(googleFont2);
+        buttonBack.setBackground(Color.WHITE);
 
         buttonActual = new JButton("Actual");
         buttonActual.addActionListener(listener);
@@ -113,12 +114,13 @@ public class VCredits extends JFrame {
         buttonUpdate.setFont(googleFont);
         buttonUpdate.setBackground(Color.ORANGE);
 
-        row3.add(Box.createRigidArea(new Dimension(100, 0)));
+        row3.add(Box.createRigidArea(new Dimension(20, 0)));
         row3.add(buttonBack);
-        row3.add(Box.createRigidArea(new Dimension(50, 0)));
+        row3.add(Box.createRigidArea(new Dimension(200, 0)));
         row3.add(buttonActual);
         row3.add(Box.createRigidArea(new Dimension(50, 0)));
         row3.add(buttonUpdate);
+        row3.add(Box.createRigidArea(new Dimension(250, 0)));
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
@@ -136,11 +138,11 @@ public class VCredits extends JFrame {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 100)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         centerPanel.add(row1);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row2);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 270)));
         centerPanel.add(row3);
 
         add(centerPanel, BorderLayout.CENTER);

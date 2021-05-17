@@ -39,7 +39,8 @@ public class VConsumo extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Consumo");
+        setTitle("SAC - Consumo");
+        setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());

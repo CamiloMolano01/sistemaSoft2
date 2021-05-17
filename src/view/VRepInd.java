@@ -45,7 +45,8 @@ public class VRepInd extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Reporte individual");
+        setTitle("SAC - Reporte individual");
+        setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
@@ -71,7 +72,7 @@ public class VRepInd extends JFrame {
         labelCode = new JLabel("Codigo:      ");
         labelCode.setFont(googleFont);
 
-        data = new JLabel("ddd");
+        data = new JLabel("");
         data.setFont(googleFont2);
         data.setPreferredSize(new Dimension(580,250));
 
@@ -94,7 +95,7 @@ public class VRepInd extends JFrame {
         buttonBack.setHorizontalAlignment(JLabel.CENTER);
         buttonBack.setAlignmentX(CENTER_ALIGNMENT);
         buttonBack.setFont(googleFont2);
-        buttonBack.setBackground(Color.GRAY);
+        buttonBack.setBackground(Color.WHITE);
 
         buttonCharge = new JButton("Cargar estudiante");
         buttonCharge.addActionListener(listener);

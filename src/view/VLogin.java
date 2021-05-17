@@ -36,7 +36,8 @@ public class VLogin extends JFrame {
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar
         */
-        setTitle("Inicio Sesion");
+        setTitle("SAC - Inicio Sesion");
+        setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
         setResizable(false);
         setLayout(new BorderLayout());
