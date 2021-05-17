@@ -84,7 +84,7 @@ public class ConnSQL {
                 datalist.add(rs.getString("Jugo"));
                 datalist.add(rs.getString("Postre"));
             }
-        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola j
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
                     + sqle.getErrorCode() + " " + sqle.getMessage());
         }
