@@ -12,7 +12,7 @@ import java.util.Date;
 
 @SuppressWarnings("ALL")
 //Instancia de la clase como un frame de la libreria java swing
-public class VRepInd extends JFrame {
+public class VRepGen extends JFrame {
 
     private ListenerC listener;
     private Control control;
@@ -21,7 +21,8 @@ public class VRepInd extends JFrame {
     private JLabel title;
     private JButton buttonCredits;
 
-    private JLabel labelCode;
+    private JLabel labelStart;
+    private JLabel labelEnd;
     private JTextField textCode;
     private JButton buttonBack;
     private JButton buttonCharge;
@@ -37,9 +38,10 @@ public class VRepInd extends JFrame {
     private Font googleFont;
     private Font googleFont2;
     private JDateChooser dateChooser;
+    private JDateChooser dateChooser2;
     private JScrollPane jp;
 
-    public VRepInd(Control control, VPrincipal vPrincipal) {
+    public VRepGen(Control control, VPrincipal vPrincipal) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
@@ -49,7 +51,7 @@ public class VRepInd extends JFrame {
 
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
            el tipo de layout, el color de fondo y el tipo de letra a usar*/
-        setTitle("SAC - Reporte individual");
+        setTitle("SAC - Reporte General");
         setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
         setResizable(false);
@@ -78,12 +80,19 @@ public class VRepInd extends JFrame {
         row4.setLayout(new BoxLayout(row4, BoxLayout.X_AXIS));
         row4.setBackground(Color.WHITE);
 
-        labelCode = new JLabel("Codigo:      ");
-        labelCode.setFont(googleFont);
+        labelStart = new JLabel("Fecha Inicio:      ");
+        labelStart.setFont(googleFont);
+
+        labelEnd = new JLabel("Fecha Fin:          ");
+        labelEnd.setFont(googleFont);
 
         dateChooser = new JDateChooser();
         dateChooser.setMaximumSize(new Dimension(250, 100));
         dateChooser.setMaxSelectableDate(new Date());
+
+        dateChooser2 = new JDateChooser();
+        dateChooser2.setMaximumSize(new Dimension(250, 100));
+        dateChooser2.setMaxSelectableDate(new Date());
 
         data = new JLabel("");
         data.setFont(googleFont2);
@@ -98,11 +107,6 @@ public class VRepInd extends JFrame {
         textCode = new JTextField();
         textCode.setFont(googleFont2);
         textCode.setMaximumSize(new Dimension(250, 100));
-
-        row1.add(Box.createRigidArea(new Dimension(160, 0)));
-        row1.add(labelCode);
-        row1.add(Box.createRigidArea(new Dimension(10, 0)));
-        row1.add(textCode);
 
         buttonBack = new JButton("Atras");
         buttonBack.addActionListener(listener);
@@ -138,8 +142,17 @@ public class VRepInd extends JFrame {
         row3.add(Box.createRigidArea(new Dimension(10, 0)));
         row3.add(jp);
 
-        row4.add(Box.createRigidArea(new Dimension(313, 0)));
-        row4.add(dateChooser);
+        row1.add(Box.createRigidArea(new Dimension(160, 0)));
+        row1.add(labelStart);
+        row1.add(Box.createRigidArea(new Dimension(10, 0)));
+        row1.add(dateChooser);
+
+        row4.add(Box.createRigidArea(new Dimension(160, 0)));
+        row4.add(labelEnd);
+        row4.add(Box.createRigidArea(new Dimension(8, 0)));
+        row4.add(dateChooser2);
+        //row4.add(Box.createRigidArea(new Dimension(313, 0)));
+        //row4.add(dateChooser);
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
@@ -158,7 +171,7 @@ public class VRepInd extends JFrame {
         centerPanel.setMaximumSize(new Dimension(800, 400));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row1);
         centerPanel.add(row4);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -184,42 +197,23 @@ public class VRepInd extends JFrame {
         vPrincipal.setVisible(true);
     }
 
-    private void putData(String code, String date) {
-        if (date.isEmpty()) {
-            ArrayList<String> dat = (ArrayList<String>) control.getData(code);
-            if (dat.isEmpty()) {
-                clean();
-            } else {
-                String totalBuy = control.getBuyCredEst(code);
-                String totalConsume = control.getConsumeCredEst(code);
-                data.setText("<html>ID_Estudiante: " + dat.get(0) + "<br>" + "Nombre: " + dat.get(1) + " " + dat.get(2)
-                        + "<br>" + "Cantidad Creditos: " + dat.get(3) + "<br>" + "Comprados total: " + totalBuy + "<br>" +
-                        "Consumos total: " + totalConsume + "</html>");
-            }
+    private void putData(String date, String date2) {
+        /*Cantidad Consumidos Almuerzo
+          Cantidad Consumidos Cena
+          Cantidad Comprados
+         */
+        if (date2.isEmpty()) {
+            String dat = control.getDataGeneralC(date, date);
+            String dat2 = control.getDataGeneralV(date, date);
+            data.setText("<html>Comprados total: " + dat2 + "<br>" +
+                    "Consumos total: " + dat + "</html>");
+
         } else {
-
-            java.sql.Date f = new java.sql.Date(dateChooser.getDate().getTime());
-            ArrayList<String> dat = (ArrayList<String>) control.getDataDate(code, f.toString());
-
-            if (dat.isEmpty()) {
-                clean();
-            } else {
-                data.setText("<html>"+registers(dat)+"</html>");
-            }
+            String dat = control.getDataGeneralC(date, date2);
+            String dat2 = control.getDataGeneralV(date, date2);
+            data.setText("<html>Comprados total: " + dat2 + "<br>" +
+                    "Consumos total: " + dat + "</html>");
         }
-    }
-
-    private String registers(ArrayList<String> dat){
-        String total = "";
-        for (int i = 0; i < dat.size(); i+=5) {
-            String type = "Consumo";
-            if (dat.get(i+2).equals("2")) {
-                type = "Compra";
-            }
-            total += "Fecha: " + dat.get(i+0) + "<br>" + "Hora: " + dat.get(i+1) + "<br>" + "Tipo: " + type +
-                    "<br>" + "Cantidad: " + dat.get(i+3) + "<br>" + "Id Vendedor: " + dat.get(i+4) + "<br>" + "<br>";
-        }
-        return total;
     }
 
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
@@ -232,15 +226,17 @@ public class VRepInd extends JFrame {
             if (act.equals("atras")) {
                 close();
             } else if (act.equals("cargar")) {
-                if (!textCode.getText().isEmpty()) {
-                    if (dateChooser.getDate() != null) {
-                        java.sql.Date f = new java.sql.Date(dateChooser.getDate().getTime());
-                        putData(textCode.getText(), f.toString());
+
+                if (dateChooser.getDate() != null) {
+                    java.sql.Date date = new java.sql.Date(dateChooser.getDate().getTime());
+                    if (dateChooser2.getDate() != null) {
+                        java.sql.Date date2 = new java.sql.Date(dateChooser2.getDate().getTime());
+                        putData(date.toString(), date2.toString());
                     } else {
-                        putData(textCode.getText(), "");
+                        putData(date.toString(), "");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese el campo");
+                    JOptionPane.showMessageDialog(null, "Seleccione la primera fecha");
                 }
                 //control.addCredits(textCode.getText(), "-1");
                 //JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));

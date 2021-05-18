@@ -30,15 +30,13 @@ public class VConsumo extends JFrame {
 
     public VConsumo(Control control, VPrincipal vPrincipal) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
-           como una clase interna
-        */
+           como una clase interna*/
         this.control = control;
         listener = new ListenerC();
         this.vPrincipal = vPrincipal;
 
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
-           el tipo de layout, el color de fondo y el tipo de letra a usar
-        */
+           el tipo de layout, el color de fondo y el tipo de letra a usar*/
         setTitle("SAC - Consumo");
         setIconImage(new ImageIcon("img/logo_uptc.png").getImage());
         setSize(800, 600);
@@ -132,8 +130,7 @@ public class VConsumo extends JFrame {
         add(centerPanel, BorderLayout.CENTER);
 
         /* Configuración de la posición del frame en la pantalla, ademas de su visibilidad, y la acción a ejercer al
-           cerrar la ventana, que en este caso es parar la ejecución del programa.
-         */
+           cerrar la ventana, que en este caso es parar la ejecución del programa*/
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

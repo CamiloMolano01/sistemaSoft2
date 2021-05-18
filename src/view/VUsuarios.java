@@ -45,6 +45,7 @@ public class VUsuarios extends JFrame {
         String[] columnNames = { "ID", "Nombre Usuario", "Nombre", "Apellido", "Admin"};
         tableUsers = new JTable(datas, columnNames);
         tableUsers.setAlignmentX(CENTER_ALIGNMENT);
+        tableUsers.setBackground(Color.WHITE);
         tableUsers.setMinimumSize(new Dimension(600, 700));
         tableUsers.setMaximumSize(new Dimension(600, 700));
         tableUsers.setPreferredSize(new Dimension(600, 700));
@@ -56,7 +57,6 @@ public class VUsuarios extends JFrame {
 
         googleFont = new Font("Open Sans", Font.BOLD, 25);
         googleFont2 = new Font("Open Sans", Font.BOLD, 15);
-
 
         row3 = new JPanel();
         row3.setMaximumSize(new Dimension(800,30));
@@ -124,6 +124,4 @@ public class VUsuarios extends JFrame {
             }
         }
     }
-
-
 }

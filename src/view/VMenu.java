@@ -54,6 +54,7 @@ public class VMenu extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
+
         googleFont = new Font("Open Sans", Font.BOLD, 25);
         googleFont2 = new Font("Open Sans", Font.BOLD, 15);
         dateChooser = new JDateChooser();
@@ -163,10 +164,10 @@ public class VMenu extends JFrame {
         vPrincipal.setVisible(true);
     }
 
-    private void putData(String code) {
+    /*private void putData(String code) {
         ArrayList<String> dat = (ArrayList<String>) control.getData(code);
         data.setText("Nombre: " + dat.get(1) + " " + dat.get(2) + "\n");
-    }
+    }*/
 
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
     superior, por medio del uso de nombres para cada boton permite hacer una accion diferente*/
@@ -180,7 +181,6 @@ public class VMenu extends JFrame {
                 close();
             } else if (act.equals("cargar")) {
                 java.sql.Date f = new java.sql.Date(dateChooser.getDate().getTime());
-                System.out.println(f.toString());
                 setDataMenu(f.toString());
                 //putData(textCode.getText());
                 //control.addCredits(textCode.getText(), "-1");
@@ -207,7 +207,6 @@ public class VMenu extends JFrame {
                         + "Carbohidrato: " + dat.get(9) + "<br>" + "Verdura/Fruta: " + dat.get(10) + "<br>" + "Sopa: "
                         + dat.get(11) + "<br>" + "Jugo: " + dat.get(12) + "<br>" + "Postre: " + dat.get(13)+ "</html>");
             }
-
         }
     }
 

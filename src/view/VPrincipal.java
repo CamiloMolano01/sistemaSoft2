@@ -89,6 +89,8 @@ public class VPrincipal extends JFrame {
         buttonConsume.setBackground(Color.WHITE);
 
         buttonGeneral = new JButton("Rep. General");
+        buttonGeneral.setActionCommand("repGen");
+        buttonGeneral.addActionListener(listener);
         buttonGeneral.setFont(googleFont2);
         buttonGeneral.setPreferredSize(new Dimension(180, 30));
         buttonGeneral.setMaximumSize(new Dimension(180, 30));
@@ -208,6 +210,11 @@ public class VPrincipal extends JFrame {
         new VRepInd(control, this);
     }
 
+    private void openRepGen() {
+        this.setVisible(false);
+        new VRepGen(control, this);
+    }
+
     private void openMenu() {
         this.setVisible(false);
         new VMenu(control, this);
@@ -237,6 +244,8 @@ public class VPrincipal extends JFrame {
                 openMenu();
             } else if (act.equals("usuarios")) {
                 openUsuarios();
+            }else if (act.equals("repGen")) {
+                openRepGen();
             }
         }
     }

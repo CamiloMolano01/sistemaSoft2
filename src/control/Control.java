@@ -4,19 +4,16 @@ import connection.ConnSQL;
 import view.VLogin;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 public class Control {
 
     ConnSQL con; //Instancia del objeto de conexión con la base de datos
-    Calendar calendar;
 
     public Control() {
         con = new ConnSQL(); //Creación de la conexión con la base de datos SQL en mySQL
         new VLogin(this); //
-        calendar = Calendar.getInstance();
     }
 
     //Permite conocer si existe o no un usuario con un nombre dado
@@ -32,19 +29,10 @@ public class Control {
     /*Con un nombre de usuario y una contraseña se hace el cruce en la base de datos con el fin de encontrar
     coincidencias respecto al nombre de usuario y su respectiva contraseña*/
     public int login(String user, String pass) {
-        //Escribimos la sentencia SQL y la columna especifica que deseamos obtener
-        //List<String> names = con.getData("SELECT * FROM usuario", "Username");
-        //Se obtiene la lista de usuarios de la bd
-
-        /*if (!existUser(user, names)) {
-            System.out.println("El usuario no existe");
-            return false;
-        }*/
         ArrayList<String> datos = getUser(user);
         if (!datos.isEmpty() && pass.equals(datos.get(2))) {
             return Integer.parseInt(datos.get(5));
         }
-        //System.out.println("Contraseña incorrecta");
         return -1;
     }
 
@@ -80,6 +68,23 @@ public class Control {
         return con.getData("SELECT * FROM estudiante where Codigo='" + code + "'");
     }
 
+    public String getDataGeneralC(String date1, String date2) {
+        //"select*from registro where Fecha='"+date1"+"' between "+"'"+"date2+"'";
+        return con.getOneColumn("select sum(Cantidad) from registro where Tipo=1 and Fecha between'"+date1+"'" +
+                " and '"+date2+"'");
+    }
+
+    public String getDataGeneralV(String date1, String date2) {
+        //"select*from registro where Fecha='"+date1"+"' between "+"'"+"date2+"'";
+        return con.getOneColumn("select sum(Cantidad) from registro where Tipo=2 and Fecha between '"+date1+"'" +
+                " and '"+date2+"'");
+    }
+
+    public List<String> getDataDate(String code, String date) {
+        String one = con.getOneColumn("SELECT Estudiante_ID from estudiante where Codigo='" + code + "'");
+        return con.getData2("SELECT * FROM registro where Estudiante_ID='" + one + "' and Fecha='"+date+"'");
+    }
+
     public boolean addCredits(String code, String quantity) {
         if (code.isEmpty() || quantity.isEmpty()) {
             return false;
@@ -112,6 +117,4 @@ public class Control {
         }
         return info;
     }
-
-
 }

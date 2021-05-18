@@ -17,9 +17,6 @@ public class ConnSQL {
     public ConnSQL() {
         try{
             con = DriverManager.getConnection(url,"cxmxlx","CJRbv3pTHYRCFct");
-            if (con!=null){
-                System.out.println("Conexión a base de datos funcionando");
-            }
         }
         catch(SQLException e)
         {
@@ -63,7 +60,7 @@ public class ConnSQL {
         String data = "";
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) data = rs.getString(1);
+            while(rs.next()) data = rs.getString(1);
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
                     + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -137,6 +134,24 @@ public class ConnSQL {
                 datalist.add(rs.getString("Name"));
                 datalist.add(rs.getString("LastName"));
                 datalist.add(rs.getString("Cant_Creditos"));
+            }
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return datalist;
+    }
+
+    public ArrayList<String> getData2(String sentence){
+        ArrayList<String> datalist = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                datalist.add(rs.getString("Fecha"));
+                datalist.add(rs.getString("Hora"));
+                datalist.add(rs.getString("Tipo"));
+                datalist.add(rs.getString("Cantidad"));
+                datalist.add(rs.getString("Usuario_ID"));
             }
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
