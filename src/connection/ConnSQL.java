@@ -91,14 +91,49 @@ public class ConnSQL {
         return datalist;
     }
 
+    public ArrayList<String> getDataUsers(String sentence){
+        ArrayList<String> datalist = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                datalist.add(rs.getString(1));
+                datalist.add(rs.getString(2));
+                datalist.add(rs.getString(3));
+                datalist.add(rs.getString(4));
+                datalist.add(rs.getString(5));
+                datalist.add(rs.getString(6));
+            }
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return datalist;
+    }
 
+    public ArrayList<String> getDataUsers2(String sentence){
+        ArrayList<String> datalist = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                datalist.add(rs.getString(1));
+                datalist.add(rs.getString(3));
+                datalist.add(rs.getString(4));
+                datalist.add(rs.getString(5));
+                datalist.add(rs.getString(6));
+            }
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+        return datalist;
+    }
 
     public ArrayList<String> getData(String sentence){
         ArrayList<String> datalist = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
-                datalist.add(rs.getString("Codigo"));
+                datalist.add(rs.getString("Estudiante_ID"));
                 datalist.add(rs.getString("Name"));
                 datalist.add(rs.getString("LastName"));
                 datalist.add(rs.getString("Cant_Creditos"));
@@ -113,6 +148,17 @@ public class ConnSQL {
     public void setData(String sentence) {
         try (PreparedStatement stmt = con.prepareStatement(sentence)) {
             stmt.executeUpdate();
+        } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+        }
+    }
+
+    public void addRegister(String sentence){
+        try (PreparedStatement stmt = con.prepareStatement(sentence)) {
+            stmt.setDate(1, new java.sql.Date(new java.util.Date().getTime()));
+            stmt.setTime(2, new java.sql.Time(new java.util.Date().getTime()));
+            stmt.execute();
         } catch (SQLException sqle) { //Si existe algun error este se visualizará en la consola
             System.out.println("Error en la ejecución:"
                     + sqle.getErrorCode() + " " + sqle.getMessage());

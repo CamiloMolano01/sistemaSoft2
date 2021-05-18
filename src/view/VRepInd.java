@@ -107,8 +107,9 @@ public class VRepInd extends JFrame {
 
         row2.add(Box.createRigidArea(new Dimension(20, 0)));
         row2.add(buttonBack);
-        row2.add(Box.createRigidArea(new Dimension(250, 0)));
+        row2.add(Box.createRigidArea(new Dimension(200, 0)));
         row2.add(buttonCharge);
+        row2.add(Box.createRigidArea(new Dimension(100, 0)));
 
         row3.add(Box.createRigidArea(new Dimension(170, 0)));
         row3.add(dataP);
@@ -119,7 +120,7 @@ public class VRepInd extends JFrame {
         upperPanel.setBackground(Color.orange);
         upperPanel.setMaximumSize(new Dimension(800,100));
 
-        title = new JLabel("                                                             Reportes Individuales");
+        title = new JLabel("Reportes Individuales");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(googleFont);
 
@@ -129,12 +130,14 @@ public class VRepInd extends JFrame {
         centerPanel = new JPanel();
         centerPanel.setBackground(Color.WHITE);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setMaximumSize(new Dimension(800,400));
 
         centerPanel.add(upperPanel);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         centerPanel.add(row1);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         centerPanel.add(row3);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 250)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 200)));
         centerPanel.add(row2);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -159,7 +162,7 @@ public class VRepInd extends JFrame {
         ArrayList<String> dat = (ArrayList<String>) control.getData(code);
         String totalBuy = control.getBuyCredEst(code);
         String totalConsume = control.getConsumeCredEst(code);
-        data.setText("<html>Nombre: " + dat.get(1) + " " + dat.get(2) + "<br>" +
+        data.setText("<html>ID_Estudiante: " + dat.get(0) +"<br>"+ "Nombre: " + dat.get(1) + " " + dat.get(2) + "<br>" +
                 "Cantidad Creditos: " + dat.get(3) + "<br>" + "Comprados total: " + totalBuy + "<br>" +
                 "Consumos total: " + totalConsume + "</html>");
     }

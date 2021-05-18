@@ -59,7 +59,7 @@ public class VConsumo extends JFrame {
         row2.setBackground(Color.WHITE);
 
         row3 = new JPanel();
-        row3.setMaximumSize(new Dimension(700,30));
+        row3.setMaximumSize(new Dimension(800,30));
         row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
         row3.setBackground(Color.WHITE);
 
@@ -80,8 +80,8 @@ public class VConsumo extends JFrame {
         buttonBack.setActionCommand("atras");
         buttonBack.setHorizontalAlignment(JLabel.CENTER);
         buttonBack.setAlignmentX(CENTER_ALIGNMENT);
-        buttonBack.setFont(googleFont);
-        buttonBack.setBackground(Color.GRAY);
+        buttonBack.setFont(googleFont2);
+        buttonBack.setBackground(Color.WHITE);
 
         buttonActual = new JButton("Actual");
         buttonActual.addActionListener(listener);
@@ -99,9 +99,9 @@ public class VConsumo extends JFrame {
         buttonConsume.setFont(googleFont);
         buttonConsume.setBackground(Color.ORANGE);
 
-        row3.add(Box.createRigidArea(new Dimension(100, 0)));
+        row3.add(Box.createRigidArea(new Dimension(20, 0)));
         row3.add(buttonBack);
-        row3.add(Box.createRigidArea(new Dimension(50, 0)));
+        row3.add(Box.createRigidArea(new Dimension(170, 0)));
         row3.add(buttonActual);
         row3.add(Box.createRigidArea(new Dimension(50, 0)));
         row3.add(buttonConsume);
@@ -110,7 +110,7 @@ public class VConsumo extends JFrame {
         upperPanel.setBackground(Color.orange);
         upperPanel.setMaximumSize(new Dimension(800,100));
 
-        jtitle = new JLabel("                                                                          Consumo");
+        jtitle = new JLabel("Consumo");
         jtitle.setHorizontalAlignment(JLabel.CENTER);
         jtitle.setFont(googleFont);
 
@@ -122,11 +122,11 @@ public class VConsumo extends JFrame {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 100)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 40)));
         centerPanel.add(row1);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row2);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 300)));
         centerPanel.add(row3);
 
         add(centerPanel, BorderLayout.CENTER);
@@ -158,7 +158,10 @@ public class VConsumo extends JFrame {
                 close();
             } else if (act.equals("cargar")){
                 control.addCredits(textCode.getText(), "-1");
+                control.createRegister(String.valueOf("1"), "1",
+                        vPrincipal.getId_user(), textCode.getText());
                 JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
+                clean();
             } else if (act.equals("actual")){
                 JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             }

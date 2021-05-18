@@ -1,6 +1,7 @@
 package view;
 
 import control.Control;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -52,17 +53,19 @@ public class VCredits extends JFrame {
         googleFont2 = new Font("Open Sans", Font.BOLD, 15);
 
         row1 = new JPanel();
-        row1.setMaximumSize(new Dimension(700,30));
+        row1.setMaximumSize(new Dimension(700, 30));
         row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
         row1.setBackground(Color.WHITE);
 
         row2 = new JPanel();
-        row2.setMaximumSize(new Dimension(700,30));
+        row2.setMaximumSize(new Dimension(700, 30));
         row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
         row2.setBackground(Color.WHITE);
 
         row3 = new JPanel();
-        row3.setMaximumSize(new Dimension(700,30));
+        row3.setMaximumSize(new Dimension(800, 30));
+        row3.setMinimumSize(new Dimension(800, 30));
+        row3.setPreferredSize(new Dimension(800, 30));
         row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
         row3.setBackground(Color.WHITE);
 
@@ -71,7 +74,7 @@ public class VCredits extends JFrame {
 
         textCode = new JTextField();
         textCode.setFont(googleFont2);
-        textCode.setMaximumSize(new Dimension(250,100));
+        textCode.setMaximumSize(new Dimension(250, 100));
 
         row1.add(Box.createRigidArea(new Dimension(100, 0)));
         row1.add(labelCode);
@@ -83,7 +86,7 @@ public class VCredits extends JFrame {
 
         textQuantity = new JTextField();
         textQuantity.setFont(googleFont);
-        textQuantity.setMaximumSize(new Dimension(250,50));
+        textQuantity.setMaximumSize(new Dimension(250, 50));
 
         row2.add(Box.createRigidArea(new Dimension(100, 0)));
         row2.add(labelQuantity);
@@ -116,17 +119,17 @@ public class VCredits extends JFrame {
 
         row3.add(Box.createRigidArea(new Dimension(20, 0)));
         row3.add(buttonBack);
-        row3.add(Box.createRigidArea(new Dimension(200, 0)));
+        row3.add(Box.createRigidArea(new Dimension(170, 0)));
         row3.add(buttonActual);
         row3.add(Box.createRigidArea(new Dimension(50, 0)));
         row3.add(buttonUpdate);
-        row3.add(Box.createRigidArea(new Dimension(250, 0)));
+        row3.add(Box.createRigidArea(new Dimension(400, 0)));
 
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.orange);
-        upperPanel.setMaximumSize(new Dimension(800,100));
+        upperPanel.setMaximumSize(new Dimension(800, 100));
 
-        title = new JLabel("                                                                          Creditos");
+        title = new JLabel("Creditos");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(googleFont);
 
@@ -136,14 +139,16 @@ public class VCredits extends JFrame {
         centerPanel = new JPanel();
         centerPanel.setBackground(Color.WHITE);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setMaximumSize(new Dimension(800, 400));
 
         centerPanel.add(upperPanel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row1);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         centerPanel.add(row2);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 270)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 300)));
         centerPanel.add(row3);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -157,7 +162,7 @@ public class VCredits extends JFrame {
     }
 
     //Permite cerrar la ventana y abrir la anterior principal
-    private void close(){
+    private void close() {
         this.setVisible(false);
         vPrincipal.setVisible(true);
     }
@@ -172,17 +177,23 @@ public class VCredits extends JFrame {
             if (act.equals("atras")) {
                 clean();
                 close();
-            } else if (act.equals("cargar")){
-                control.addCredits(textCode.getText(), textQuantity.getText());
-                JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
-                textQuantity.setText("");
-            } else if (act.equals("actual")){
+            } else if (act.equals("cargar")) {
+                if (control.addCredits(textCode.getText(), textQuantity.getText())) {
+                    control.createRegister(String.valueOf("2"), textQuantity.getText(),
+                            vPrincipal.getId_user(), textCode.getText());
+                    JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
+                    textQuantity.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Faltan datos");
+                }
+
+            } else if (act.equals("actual")) {
                 JOptionPane.showMessageDialog(null, control.getCredits(textCode.getText()));
             }
         }
     }
 
-    private void clean(){
+    private void clean() {
         textQuantity.setText("");
         textCode.setText("");
     }

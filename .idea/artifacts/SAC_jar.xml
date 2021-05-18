@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SAC:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SAC_jar</output-path>
+    <root id="archive" name="ProyectoIJ.jar">
+      <element id="module-output" name="ProyectoIJ" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.23.jar" path-in-jar="/" />
+      <element id="library" level="project" name="jcalendar-1.4" />
+      <element id="library" level="project" name="mysql-connector-java-8.0.23" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jcalendar-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

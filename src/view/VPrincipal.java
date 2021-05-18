@@ -29,12 +29,15 @@ public class VPrincipal extends JFrame {
     private Font googleFont;
     private Font googleFont2;
 
-    public VPrincipal(Control control, VLogin vLogin) {
+    private String id_user;
+
+    public VPrincipal(Control control, VLogin vLogin, String id_user, int type) {
         /* Inicialización de los componenetes que pasan como paramentro, ademas del action listener local que funciona
            como una clase interna
         */
         this.control = control;
         this.vLogin = vLogin;
+        this.id_user = id_user;
         listener = new ListenerP();
 
         /* Configuración del jframe basicos, como nombre, tamaño, si es o no posible cambiar su tamaño una vez ejecutado
@@ -111,6 +114,8 @@ public class VPrincipal extends JFrame {
         buttonMenu.setBackground(Color.WHITE);
 
         buttonUsers = new JButton("Usuarios");
+        buttonUsers.setActionCommand("usuarios");
+        buttonUsers.addActionListener(listener);
         buttonUsers.setFont(googleFont2);
         buttonUsers.setPreferredSize(new Dimension(180, 30));
         buttonUsers.setMaximumSize(new Dimension(180, 30));
@@ -165,6 +170,13 @@ public class VPrincipal extends JFrame {
 
         add(centerPanel, BorderLayout.CENTER);
 
+        //Debido a que el tipo 1 es un usuario no Admin, ingresa sin estas opciones habilitadas
+        if (type == 1) {
+            buttonIndividual.setEnabled(false);
+            buttonGeneral.setEnabled(false);
+            buttonUsers.setEnabled(false);
+        }
+
         /* Configuración de la posición del frame en la pantalla, ademas de su visibilidad, y la acción a ejercer al
            cerrar la ventana, que en este caso es parar la ejecución del programa.
          */
@@ -191,14 +203,19 @@ public class VPrincipal extends JFrame {
         new VConsumo(control, this);
     }
 
-    private void openRepInd(){
+    private void openRepInd() {
         this.setVisible(false);
         new VRepInd(control, this);
     }
 
-    private void openMenu(){
+    private void openMenu() {
         this.setVisible(false);
         new VMenu(control, this);
+    }
+
+    private void openUsuarios() {
+        this.setVisible(false);
+        new VUsuarios(control, this);
     }
 
     /* Clase interna que implementa el escucha de las acciones a ejecutar con los botones que se encuentran en la clase
@@ -218,8 +235,14 @@ public class VPrincipal extends JFrame {
                 openRepInd();
             } else if (act.equals("menu")) {
                 openMenu();
+            } else if (act.equals("usuarios")) {
+                openUsuarios();
             }
         }
+    }
+
+    public String getId_user() {
+        return id_user;
     }
 }
 

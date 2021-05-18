@@ -129,20 +129,24 @@ public class VLogin extends JFrame {
     }
 
     //Permite cerrar la ventana y abrir la anterior principal
-    private void close(){
-        userfield.setText("");
-        passfield.setText("");
-        new VPrincipal(control, this);
-        setVisible(false);
+    private void login(String user, int type){
+        if(type == -1){
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+        }else{
+            userfield.setText("");
+            passfield.setText("");
+            new VPrincipal(control,this, user, type);
+            setVisible(false);
+        }
     }
 
     // Clase interna que implementa el escucha de las acciones a ejecutar con el boton que se encuentra en la clase
+    // 0=Admin, 1=Normal
     public class ListenerLogin implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(control.login(userfield.getText(), String.valueOf(passfield.getPassword()))){
-                close();
-            }
+            String id_user = control.getUser(userfield.getText()).get(0);
+            login(id_user, control.login(userfield.getText(), String.valueOf(passfield.getPassword())));
         }
     }
 

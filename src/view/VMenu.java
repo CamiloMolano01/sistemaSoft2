@@ -102,7 +102,7 @@ public class VMenu extends JFrame {
         buttonBack.setHorizontalAlignment(JLabel.CENTER);
         buttonBack.setAlignmentX(CENTER_ALIGNMENT);
         buttonBack.setFont(googleFont2);
-        buttonBack.setBackground(Color.GRAY);
+        buttonBack.setBackground(Color.WHITE);
 
         buttonCharge = new JButton("Cargar Menu");
         buttonCharge.addActionListener(listener);
@@ -126,7 +126,7 @@ public class VMenu extends JFrame {
         upperPanel.setBackground(Color.orange);
         upperPanel.setMaximumSize(new Dimension(800, 100));
 
-        title = new JLabel("                                                                              Menu");
+        title = new JLabel("Menu");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(googleFont);
 
@@ -142,7 +142,7 @@ public class VMenu extends JFrame {
         centerPanel.add(row1);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         centerPanel.add(row3);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
         centerPanel.add(row2);
         centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
